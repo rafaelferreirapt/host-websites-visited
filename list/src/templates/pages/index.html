@@ -1,0 +1,81 @@
+<!-- top tiles -->
+<div class="row tile_count">
+  <div class="animated flipInY col-md-3 col-sm-4 col-xs-4 tile_stats_count">
+    <div class="left"></div>
+    <div class="right">
+      <span class="count_top"><i class="fa fa-line-chart"></i> Total days saved</span>
+      <div class="count" id="total_days">0</div>
+    </div>
+  </div>
+  <div class="animated flipInY col-md-3 col-sm-4 col-xs-4 tile_stats_count">
+    <div class="left"></div>
+    <div class="right">
+      <span class="count_top"><i class="fa fa-line-chart"></i> Total data in DB</span>
+      <div class="count" id="total_data">0</div>
+    </div>
+  </div>
+  <div class="animated flipInY col-md-3 col-sm-4 col-xs-4 tile_stats_count">
+    <div class="left"></div>
+    <div class="right">
+      <span class="count_top"><i class="fa fa-line-chart"></i> Total Pollutants</span>
+      <div class="count" id="total_pollutants">0</div>
+    </div>
+  </div>
+  <div class="animated flipInY col-md-3 col-sm-4 col-xs-4 tile_stats_count">
+    <div class="left"></div>
+    <div class="right">
+      <span class="count_top"><i class="fa fa-line-chart"></i> Total Stations</span>
+      <div class="count" id="total_stations">0</div>
+    </div>
+  </div>
+
+</div>
+<!-- /top tiles -->
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="dashboard_graph">
+      <div class="row x_title">
+        <div class="col-md-4">
+          <h3>Data comparator</h3><small id="station_selected"></small>
+        </div>
+        <div class="col-md-4">
+            <div style="padding-left: 15%">
+                <select class="select2_single form-control" tabindex="-1" id="comparations" style="display: none; width: 100px;">
+                    <option value="sample">Sample</option>
+                </select>
+                <span class="dropdown-wrapper" aria-hidden="true"></span>
+                <select class="select2_single form-control" tabindex="-1" id="stations" style="display: none; width: 150px;">
+                </select>
+                <span class="dropdown-wrapper" aria-hidden="true"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+          <div id="reportrange" class="pull-right" style="background: #fff; height: 40px; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+            <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 col-sm-12 col-xs-12 bg-white">
+          <div class="" role="tabpanel" data-example-id="togglable-tabs">
+            <ul id="daysTabsHeaders" class="nav nav-tabs bar_tabs" role="tablist">
+
+            </ul>
+            <div id="daysTabsPanel" class="tab-content">
+              <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+</div>

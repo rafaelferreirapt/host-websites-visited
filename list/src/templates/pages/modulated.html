@@ -1,0 +1,35 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Modulated data
+                <small>Days saved to the database</small>
+            </h2>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+
+            <p>Here you can see what days have modulated data in the <code>database</code> and trigger the observed data collector.</p>
+
+            <table class="table table-striped responsive-utilities jambo_table bulk_action">
+                <thead>
+                <tr class="headings">
+                    <th class="column-title">Date</th>
+                    <th class="column-title">Number of records</th>
+                    <th class="column-title">Have observed data?</th>
+                    <th class="column-title no-link last"><b><span class="nobr">Action</span></b></th>
+                </tr>
+                </thead>
+                <tbody id="modulatedData">
+                </tbody>
+            </table>
+            <div align="center" id="pages" class="hidden">
+            <ul  class="pagination"><li>
+                <button id="previous" type="button" class="btn btn-default">Previous</button>
+                <button id="next" type="button" class="btn btn-default">Next</button></li></ul>
+
+            </div>
+            <div id="response"></div>
+        </div>
+    </div>
+</div>
