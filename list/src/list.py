@@ -1,5 +1,6 @@
 import argparse
 import pyshark
+import subprocess
 
 """
 To use in the ubuntu server:
@@ -10,6 +11,7 @@ sudo apt-get install -y tshark
 def pkt_callback(pkt):
     try:
         print pkt.http.host
+        subprocess.Popen(['python', 'manage.py', 'insert_host', pkt.http.host])
     except AttributeError:
         pass
 
