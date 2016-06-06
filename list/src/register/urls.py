@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import WebsitesForHour, ListMonths, ListDays, ListHours
+from .views import HostsForHour, ListMonths, ListDays, ListHours
 
 urlpatterns = [
                url(r'^list_hours/(?P<year>.+)/(?P<month>.+)/(?P<day>.+)/$', ListHours.as_view(),
@@ -8,6 +8,6 @@ urlpatterns = [
                    name="List days for one month"),
                url(r'^list_months/(?P<year>.+)/$', ListMonths.as_view(),
                    name="List months for one year"),
-               url(r'^websites/(?P<year>.+)/(?P<month>.+)/(?P<day>.+)/(?P<hour>.+)/$', WebsitesForHour.as_view(),
-                   name="Websites for one hour"),
+               url(r'^hosts/(?P<year>.+)/(?P<month>.+)/(?P<day>.+)/(?P<hour>.+)/$', HostsForHour.as_view(),
+                   name="Hosts for one hour"),
               ]

@@ -60,7 +60,7 @@ class ListMonths(views.APIView):
         return response
 
 
-class WebsitesForHour(views.APIView):
+class HostsForHour(views.APIView):
 
     @staticmethod
     def get(request, year, month, day, hour):
@@ -72,7 +72,7 @@ class WebsitesForHour(views.APIView):
 
         for entry in entries:
             results += [{
-              "website": entry.website,
+              "host": entry.website.host,
               "hits": entry.hits
             }]
 
