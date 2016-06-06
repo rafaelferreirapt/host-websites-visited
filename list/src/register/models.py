@@ -12,6 +12,7 @@ class Date(models.Model):
 
 class Hour(models.Model):
     hour = models.IntegerField(unique=True, blank=False)
+    date = models.ForeignKey(Date, blank=False)
 
 
 class Website(models.Model):
@@ -20,6 +21,5 @@ class Website(models.Model):
 
 class Entry(models.Model):
     website = models.ForeignKey(Website, blank=False)
-    date = models.ForeignKey(Date, blank=False)
     hour = models.ForeignKey(Hour, blank=False)
     hits = models.BigIntegerField(default=0)
