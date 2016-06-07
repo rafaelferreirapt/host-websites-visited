@@ -16,14 +16,14 @@ class Command(BaseCommand):
         now = datetime.datetime.now()
 
         try:
-            h = Hour.objects.get(hour=now.hour)
-        except Hour.DoesNotExist:
-            h = Hour.objects.create(hour=now.hour)
-
-        try:
             d = Date.objects.get(year=now.year, month=now.month, day=now.day)
         except Date.DoesNotExist:
             d = Date.objects.create(year=now.year, month=now.month, day=now.day)
+
+        try:
+            h = Hour.objects.get(hour=now.hour, date=d)
+        except Hour.DoesNotExist:
+            h = Hour.objects.create(hour=now.hour, date=d)
 
         for host in options['host']:
             try:
@@ -32,9 +32,9 @@ class Command(BaseCommand):
                 website = Website.objects.create(host=host)
 
             try:
-                entry = Entry.objects.get(date=d, hour=h, website=website)
+                entry = Entry.objects.get(hour=h, website=website)
             except Entry.DoesNotExist:
-                entry = Entry.objects.create(date=d, hour=h, website=website)
+                entry = Entry.objects.create(hour=h, website=website)
 
             entry.hits += 1
             entry.save()

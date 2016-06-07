@@ -1,9 +1,10 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic.base import TemplateView
-
+from register.urls import urlpatterns as reg
 
 urlpatterns = [
+               url(r'^api/v1/register/', include(reg)),
                url(r'^admin/', include(admin.site.urls)),
                url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 

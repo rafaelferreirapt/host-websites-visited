@@ -9,8 +9,8 @@ class ListHours(views.APIView):
 
     @staticmethod
     def get(request, year, month, day):
-        date = get_object_or_404(Date, year=year, month=month, day=day)
-        hours = get_list_or_404(Hour, date=date)
+        date = get_object_or_404(Date, year=int(year), month=int(month), day=int(day))
+        hours = get_list_or_404(Hour, date=int(date))
 
         results = []
 
@@ -28,7 +28,7 @@ class ListDays(views.APIView):
 
     @staticmethod
     def get(request, year, month):
-        dates = get_list_or_404(Date, year=year, month=month)
+        dates = get_list_or_404(Date, year=int(year), month=int(month))
 
         results = []
 
@@ -46,7 +46,7 @@ class ListMonths(views.APIView):
 
     @staticmethod
     def get(request, year):
-        months = get_list_or_404(Date, year=year)
+        months = get_list_or_404(Date, year=int(year))
 
         results = []
 
