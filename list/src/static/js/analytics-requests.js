@@ -1,7 +1,21 @@
 $(document).ready(function(){
     $.getJSON("/api/v1/register/list_months/2016/", function (data) {
-        console.log(data);
+        data.forEach(function(entry) {
+            var select = "#month"+entry.month;
+            $(select).html("<a href=\"#month\" rel=\"" + entry.month + "\"><strong>" + $(select).html()
+                + "</strong></a>");
+        });
+
+        $("a[href='#month']").click(function () {
+            var month = $(this).attr("rel");
+            $.getJSON("/api/v1/register/list_days/2016/" + month + "/", function (data) {
+                console.log(data);
+            });
+        });
+
     });
+
+
 
     /* echarts donut */
 
