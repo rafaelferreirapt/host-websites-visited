@@ -2,14 +2,24 @@ $(document).ready(function(){
     $.getJSON("/api/v1/register/list_months/2016/", function (data) {
         data.forEach(function(entry) {
             var select = "#month"+entry.month;
-            $(select).html("<a href=\"#month\" rel=\"" + entry.month + "\"><strong>" + $(select).html()
-                + "</strong></a>");
+
+            $(select).html("<a href=\"#month\" rel=\"" + entry.month + "\"><span class=\"btn btn-success btn-xs\"><strong>" + $(select).html()
+                + "</strong></span></a>");
         });
 
+        $("#messageAnalytics").html('<div class="alert alert-info alert-dismissible fade in" role="alert"><strong>Select one month!</strong><br/> You should select one month to get the days available for that month. Months with data are displayed with strong format.</div>');
+
         $("a[href='#month']").click(function () {
+            $("#messageAnalytics").html("");
             var month = $(this).attr("rel");
             $.getJSON("/api/v1/register/list_days/2016/" + month + "/", function (data) {
                 console.log(data);
+                data.forEach(function(entry) {
+                   var select = "#day" + entry.day;
+                    $(select).html("<a href=\"#day\" rel=\"" + entry.day + "\"><span class=\"btn btn-success btn-xs\"><strong>" + entry.day
+                        + "</strong></span></a>");
+                });
+                $("#messageAnalytics").html('<div class="alert alert-info alert-dismissible fade in" role="alert"><strong>Select one day!</strong><br/> You should select one day to get the hours available for that day. Hours with data are displayed with strong format.</div>');
             });
         });
 
