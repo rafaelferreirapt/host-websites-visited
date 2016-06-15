@@ -10,7 +10,7 @@ class ListHours(views.APIView):
     @staticmethod
     def get(request, year, month, day):
         date = get_object_or_404(Date, year=int(year), month=int(month), day=int(day))
-        hours = get_list_or_404(Hour, date=int(date))
+        hours = get_list_or_404(Hour, date=date)
 
         results = []
 

@@ -15,11 +15,28 @@ $(document).ready(function(){
             $.getJSON("/api/v1/register/list_days/2016/" + month + "/", function (data) {
                 console.log(data);
                 data.forEach(function(entry) {
-                   var select = "#day" + entry.day;
-                    $(select).html("<a href=\"#day\" rel=\"" + entry.day + "\"><span class=\"btn btn-success btn-xs\"><strong>" + entry.day
+                    var select = "#day" + entry.day;
+                    $(select).html("<a href=\"#day\" rel=\"" + month + "." + entry.day + "\"><span class=\"btn btn-success btn-xs\"><strong>" + entry.day
                         + "</strong></span></a>");
                 });
+
                 $("#messageAnalytics").html('<div class="alert alert-info alert-dismissible fade in" role="alert"><strong>Select one day!</strong><br/> You should select one day to get the hours available for that day. Hours with data are displayed with strong format.</div>');
+
+                $("a[href='#day']").click(function () {
+                    $("#messageAnalytics").html("");
+                    var day_month = $(this).attr("rel").split(".");
+                    var day_d = day_month[1];
+                    var month_d = day_month[0];
+
+                    $.getJSON("/api/v1/register/list_hours/2016/" + month_d + "/"  + day_d + "/", function (data) {
+                        console.log(data);
+                        data.forEach(function(entry) {
+                            var select = "#hour" + entry.hour;
+                            $(select).html("<a href=\"#hour\" rel=\"" + month_d + "." + day_d + "." + entry.hour + "\"><span class=\"btn btn-success btn-xs\"><strong>" + entry.hour + "</strong></span></a>");
+                        });
+                        $("#messageAnalytics").html('<div class="alert alert-info alert-dismissible fade in" role="alert"><strong>Select one hour!</strong><br/> You should select one hour to get the hosts available for that hour.</div>');
+                    });
+                });
             });
         });
 
