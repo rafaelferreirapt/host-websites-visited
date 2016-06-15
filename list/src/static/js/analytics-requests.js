@@ -35,95 +35,105 @@ $(document).ready(function(){
                             $(select).html("<a href=\"#hour\" rel=\"" + month_d + "." + day_d + "." + entry.hour + "\"><span class=\"btn btn-success btn-xs\"><strong>" + entry.hour + "</strong></span></a>");
                         });
                         $("#messageAnalytics").html('<div class="alert alert-info alert-dismissible fade in" role="alert"><strong>Select one hour!</strong><br/> You should select one hour to get the hosts available for that hour.</div>');
+
+                        $("a[href='#hour']").click(function () {
+                            $("#messageAnalytics").html("");
+                            var day_month_hour = $(this).attr("rel").split(".");
+                            var day_h = day_month_hour[1];
+                            var month_h = day_month_hour[0];
+                            var hour_h = day_month_hour[2];
+
+                            $.getJSON("/api/v1/register/hosts/2016/" + month_h + "/"  + day_h + "/" + hour_h + "/", function (data) {
+                                console.log(data);
+
+                                var hosts = [];
+                                data.forEach(function(entry) {
+                                    hosts.push(entry.host);
+                                });
+
+                                var stats = [];
+
+                                data.forEach(function (entry) {
+                                   stats.push({
+                                                value: entry.hits,
+                                                name: entry.host
+                                              });
+                                });
+
+                                /* echarts donut */
+
+                                var echartDonut = echarts.init(document.getElementById('echart_donut'), theme);
+
+                                echartDonut.setOption({
+                                tooltip: {
+                                  trigger: 'item',
+                                  formatter: "{a} <br/>{b} : {c} ({d}%)"
+                                },
+                                calculable: true,
+                                legend: {
+                                  x: 'center',
+                                  y: 'bottom',
+                                  data: hosts
+                                },
+                                toolbox: {
+                                  show: true,
+                                  feature: {
+                                    magicType: {
+                                      show: true,
+                                      type: ['pie', 'funnel'],
+                                      option: {
+                                        funnel: {
+                                          x: '25%',
+                                          width: '50%',
+                                          funnelAlign: 'center',
+                                          max: 1548
+                                        }
+                                      }
+                                    },
+                                    restore: {
+                                      show: true,
+                                      title: "Restore"
+                                    },
+                                    saveAsImage: {
+                                      show: true,
+                                      title: "Save Image"
+                                    }
+                                  }
+                                },
+                                series: [{
+                                  name: 'Host',
+                                  type: 'pie',
+                                  radius: ['35%', '55%'],
+                                  itemStyle: {
+                                    normal: {
+                                      label: {
+                                        show: true
+                                      },
+                                      labelLine: {
+                                        show: true
+                                      }
+                                    },
+                                    emphasis: {
+                                      label: {
+                                        show: true,
+                                        position: 'center',
+                                        textStyle: {
+                                          fontSize: '14',
+                                          fontWeight: 'normal'
+                                        }
+                                      }
+                                    }
+                                  },
+                                  data: stats
+                                }]
+                                });
+
+                            });
+                        });
                     });
                 });
             });
         });
 
-    });
-
-
-
-    /* echarts donut */
-
-    var echartDonut = echarts.init(document.getElementById('echart_donut'), theme);
-
-    echartDonut.setOption({
-    tooltip: {
-      trigger: 'item',
-      formatter: "{a} <br/>{b} : {c} ({d}%)"
-    },
-    calculable: true,
-    legend: {
-      x: 'center',
-      y: 'bottom',
-      data: ['Direct Access', 'E-mail Marketing', 'Union Ad', 'Video Ads', 'Search Engine']
-    },
-    toolbox: {
-      show: true,
-      feature: {
-        magicType: {
-          show: true,
-          type: ['pie', 'funnel'],
-          option: {
-            funnel: {
-              x: '25%',
-              width: '50%',
-              funnelAlign: 'center',
-              max: 1548
-            }
-          }
-        },
-        restore: {
-          show: true,
-          title: "Restore"
-        },
-        saveAsImage: {
-          show: true,
-          title: "Save Image"
-        }
-      }
-    },
-    series: [{
-      name: 'Access to the resource',
-      type: 'pie',
-      radius: ['35%', '55%'],
-      itemStyle: {
-        normal: {
-          label: {
-            show: true
-          },
-          labelLine: {
-            show: true
-          }
-        },
-        emphasis: {
-          label: {
-            show: true,
-            position: 'center',
-            textStyle: {
-              fontSize: '14',
-              fontWeight: 'normal'
-            }
-          }
-        }
-      },
-      data: [{
-        value: 335,
-        name: 'Direct Access'
-      }, {
-        value: 310,
-        name: 'E-mail Marketing'
-      }, {
-        value: 234,
-        name: 'Union Ad'
-      }, {
-        value: 135,
-        name: 'Video Ads'
-      }, {
-        value: 1548,
-        name: 'Search Engine'
-      }]
-    }]
     });
 });
