@@ -23,3 +23,7 @@ class Entry(models.Model):
     website = models.ForeignKey(Website, blank=False)
     hour = models.ForeignKey(Hour, blank=False)
     hits = models.BigIntegerField(default=0)
+
+
+class BlackHosts(models.Model):
+    host = models.CharField(blank=False, max_length=200, unique=True)

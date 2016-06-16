@@ -11,7 +11,6 @@ sudo apt-get install -y tshark
 
 def pkt_callback(pkt):
     try:
-        print pkt.http.host
         subprocess.Popen(['python',  os.path.dirname(os.path.abspath(__file__)) + '/manage.py', 'insert_host', pkt.http.host])
     except AttributeError:
         pass
