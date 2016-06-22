@@ -1,5 +1,10 @@
 {
   "hosts": [
-    "rafaelferreira"
+    "rafaelferreira",
+    "cdn",
+    "static",
+    "api",
+    "ajax.",
+    "stats"
   ]
 }

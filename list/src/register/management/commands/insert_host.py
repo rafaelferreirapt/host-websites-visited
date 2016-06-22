@@ -8,14 +8,6 @@ class Command(BaseCommand):
 
     def __init__(self):
         super(Command, self).__init__()
-        self.terms_list = [
-            "cdn",
-            "static",
-            "api",
-            "ajax."
-            "s.",
-            "stats"
-        ]
 
     def add_arguments(self, parser):
         parser.add_argument('host', nargs='+', type=str)
@@ -34,17 +26,16 @@ class Command(BaseCommand):
             h = Hour.objects.create(hour=now.hour, date=d)
 
         for host in options['host']:
-            # black_hosts = BlackHosts.objects.filter(host__contains=host).count()
+            black_hosts = BlackHosts.objects.all()
 
-            # host_valid = host.startswith("www") or (len(host.split(".")) == 2)
             term_valid = True
 
-            for term in self.terms_list:
-                if term in host:
+            for term in black_hosts:
+                if term.host in host:
                     term_valid = False
                     break
 
-            if black_hosts == 0 and term_valid:  # and host_valid:
+            if term_valid:  # and host_valid:
                 print host
 
                 try:
