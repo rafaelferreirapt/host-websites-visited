@@ -50,10 +50,17 @@ class ListMonths(views.APIView):
 
         results = []
 
+        prev = None
+
         for month in months:
+            if prev is not None and prev == month.month:
+                continue
+
             results += [{
                 "month": month.month
             }]
+
+            prev = month.month
 
         response = Response(results)
         # response["Access-Control-Allow-Origin"] = "*"
