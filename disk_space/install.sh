@@ -6,7 +6,7 @@ tar xzf noip-duc-linux.tar.gz
 cd noip-2.1.9-1
 make
 sudo make install
-sudo pip install smtplib email
+sudo pip install email
 
 
 # */5 * * * * /path/disk_space.sh
